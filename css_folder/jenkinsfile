@@ -1,0 +1,15 @@
+pipeline {
+  agent any
+  stages {
+    stage('Build Image') {
+      steps {
+        sh 'docker build -t username/static-site:1.0 .'
+      }
+    }
+    stage('Push Image') {
+      steps {
+        sh 'docker push username/static-site:1.0'
+      }
+    }
+  }
+}
