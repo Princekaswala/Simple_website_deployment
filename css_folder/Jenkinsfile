@@ -14,5 +14,13 @@ pipeline {
         sh 'docker push IMAGE_NAME:IMAGE_TAG'
       }
     }
+     stage('Deploy to Kubernetes') {
+      steps {
+        sh '''
+          kubectl set image deployment/static-site website=$IMAGE_NAME:$IMAGE_TAG
+        '''
+      }
+    }
   }
+}
 }
