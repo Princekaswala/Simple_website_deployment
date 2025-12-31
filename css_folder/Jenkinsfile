@@ -1,14 +1,17 @@
 pipeline {
   agent any
+  environment{
+    IMAGE_NAME="kaswaladocker/static-site"
+    IMAGE_TAG="${BUILD_NUMBER}"
   stages {
     stage('Build Image') {
       steps {
-        sh 'docker build -t kaswaladocker/static-site:1.0 .'
+        sh 'docker build -t IMAGE_NAME:IMAGE_TAG .'
       }
     }
     stage('Push Image') {
       steps {
-        sh 'docker push kaswaladocker/static-site:1.0'
+        sh 'docker push IMAGE_NAME:IMAGE_TAG'
       }
     }
   }
