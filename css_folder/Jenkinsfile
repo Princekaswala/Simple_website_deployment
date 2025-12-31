@@ -3,6 +3,7 @@ pipeline {
   environment{
     IMAGE_NAME="kaswaladocker/static-site"
     IMAGE_TAG="${BUILD_NUMBER}"
+  }
   stages {
     stage('Build Image') {
       steps {
@@ -17,10 +18,9 @@ pipeline {
      stage('Deploy to Kubernetes') {
       steps {
         sh '''
-          kubectl set image deployment/static-site=$IMAGE_NAME:$IMAGE_TAG
+          kubectl set image deployment/static-site site=$IMAGE_NAME:$IMAGE_TAG
         '''
       }
     }
   }
-}
 }
